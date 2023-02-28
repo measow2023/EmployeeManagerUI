@@ -1,0 +1,37 @@
+<div class="error">
+  <span *ngIf="errorMessage">{{ errorMessage }}</span>
+</div>
+<h1 mat-dialog-title>Assign {{ actionType }}</h1>
+<div mat-dialog-content>
+  <table>
+    <tr>
+      <td>Id</td>
+      <td>{{data.employeeId}}</td>
+    </tr>
+    <tr>
+      <td>First Name</td>
+      <td>{{data.employeeFirstName}}</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>{{data.employeeLastName}}</td>
+    </tr>
+    <tr>
+      <td>Vacation Days <br />Accumulated</td>
+      <td>{{data.employeeVacationDaysAccumulated}}</td>
+    </tr>
+    <tr>
+      <td>{{ actionType }}</td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>{{ actionType }}</mat-label>
+          <input matInput maxlength="5" [(ngModel)]="actionValue">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="onSubmit(data)" cdkFocusInitial>Ok</button>
+  <button mat-button color="accent" matDialogClose>Cancel</button>
+</div>

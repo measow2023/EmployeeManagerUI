@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row mt-2">
+    <div class="col-12 col-lg-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Employees</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef> First Name </th>
+              <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastName">
+              <th mat-header-cell *matHeaderCellDef> Last Name </th>
+              <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="employeeType">
+              <th mat-header-cell *matHeaderCellDef> Employee Type </th>
+              <td mat-cell *matCellDef="let element"> {{ element.employeeType }} </td>
+            </ng-container>
+            <ng-container matColumnDef="vacationDaysAccumulated">
+              <th mat-header-cell *matHeaderCellDef> Vacation Days Accumulated </th>
+              <td mat-cell *matCellDef="let element"> {{ element.vacationDaysAccumulated }} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element">
+                <a mat-button color="primary" (click)="openWorkedDaysDialog(dataSource.indexOf(element))">Assign Worked
+                  Days</a>
+                <a mat-button color="accent" (click)="openVacationDaysUsedDialog(dataSource.indexOf(element))">Assign
+                  Vacation Days Used</a>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
