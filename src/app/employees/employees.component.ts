@@ -31,20 +31,44 @@ export class EmployeesComponent implements OnInit {
   }
 
   private openActionsDialog(index: number, actionType: ActionType): void {
+    var dialogRef = this.dialog.open(ActionsDialogComponent);
+
     let employee = this.dataSource[index];
-    const dialogRef = this.dialog.open(ActionsDialogComponent, {
-      data: {
-        actionType: actionType,
-        employeeService: this.employeeService,
-        employeeId: employee.id,
-        employeeFirstName: employee.firstName,
-        employeeLastName: employee.lastName,
-        employeeVacationDaysAccumulated: employee.vacationDaysAccumulated
-      },
+
+    const dialogComponentInstance: ActionsDialogComponent = dialogRef.componentInstance;
+
+    dialogComponentInstance.data = {
+      actionType: actionType,
+      employeeId: employee.id,
+      employeeFirstName: employee.firstName,
+      employeeLastName: employee.lastName,
+      employeeVacationDaysAccumulated: employee.vacationDaysAccumulated
+    };
+
+    dialogComponentInstance.onModalCancel.subscribe(() => {
+      dialogRef.close();
     });
 
-    dialogRef.afterClosed().subscribe(data => {
-      this.loadData();
+    dialogComponentInstance.onWorkedDaysSave.subscribe((payload: { employeeId: string, workedDays: number }) => {
+      this.employeeService.assignWorkedDays(payload.employeeId, payload.workedDays)
+        .subscribe(
+          res => {
+            dialogRef.close()
+            this.loadData();
+          },
+          err => dialogComponentInstance.errorMessage = err.error
+        );
+    });
+
+    dialogComponentInstance.onVacationDaysUsedSave.subscribe((payload: { employeeId: string, vacationDaysUsed: number }) => {
+      this.employeeService.assignVacationDaysUsed(payload.employeeId, payload.vacationDaysUsed)
+        .subscribe(
+          res => {
+            dialogRef.close()
+            this.loadData();
+          },
+          err => dialogComponentInstance.errorMessage = err.error
+        );
     });
   }
 

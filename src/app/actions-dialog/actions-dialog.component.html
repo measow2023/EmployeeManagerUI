@@ -1,7 +1,7 @@
 <div class="error">
   <span *ngIf="errorMessage">{{ errorMessage }}</span>
 </div>
-<h1 mat-dialog-title>Assign {{ actionType }}</h1>
+<h1 mat-dialog-title>Assign {{ data.actionType }}</h1>
 <div mat-dialog-content>
   <table>
     <tr>
@@ -21,10 +21,10 @@
       <td>{{data.employeeVacationDaysAccumulated}}</td>
     </tr>
     <tr>
-      <td>{{ actionType }}</td>
+      <td>{{ data.actionType }}</td>
       <td>
         <mat-form-field appearance="fill">
-          <mat-label>{{ actionType }}</mat-label>
+          <mat-label>{{ data.actionType }}</mat-label>
           <input matInput maxlength="5" [(ngModel)]="actionValue">
         </mat-form-field>
       </td>
