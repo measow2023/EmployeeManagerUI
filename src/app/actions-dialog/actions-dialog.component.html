@@ -25,13 +25,13 @@
       <td>
         <mat-form-field appearance="fill">
           <mat-label>{{ data.actionType }}</mat-label>
-          <input matInput maxlength="5" [(ngModel)]="actionValue">
+          <input matInput maxlength="5" [(ngModel)]="days">
         </mat-form-field>
       </td>
     </tr>
   </table>
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="primary" (click)="onSubmit(data)" cdkFocusInitial>Ok</button>
+  <button mat-button color="primary" (click)="onSubmit(days)" cdkFocusInitial>Ok</button>
   <button mat-button color="accent" matDialogClose>Cancel</button>
 </div>

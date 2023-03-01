@@ -8,7 +8,7 @@ import { ActionsDialogData } from '../actions-dialog-data';
   styleUrls: ['./actions-dialog.component.css']
 })
 export class ActionsDialogComponent {
-  actionValue!: number;
+  days: number = 0;
   @Input() errorMessage!: string;
   @Input() data!: ActionsDialogData;
   @Output() onWorkedDaysSave: EventEmitter<any> = new EventEmitter();
@@ -17,13 +17,13 @@ export class ActionsDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<ActionsDialogComponent>) { }
 
-  onSubmit(data: ActionsDialogData): void {
+  onSubmit(actionValue: number): void {
     switch (this.data.actionType) {
       case ActionType.WORKED_DAYS:
-        this.assignWorkedDays(data.employeeId, this.actionValue);
+        this.assignWorkedDays(this.data.employeeId, actionValue);
         break;
       case ActionType.VACATION_DAYS_USED:
-        this.assignVacationDaysUsed(data.employeeId, this.actionValue);
+        this.assignVacationDaysUsed(this.data.employeeId, actionValue);
         break;
       default:
         throw Error("Invalid Action Type.");
